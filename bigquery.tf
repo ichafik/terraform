@@ -24,3 +24,18 @@ resource "google_bigquery_table" "vw_aggregated" {
     use_legacy_sql = false
   }
 }
+
+resource "google_bigquery_table" "vw_aggregated" {
+  dataset_id = google_bigquery_dataset.views.dataset_id
+  table_id   = "vw_aggregated_todelete"
+
+  labels = {
+    env = "terraform"
+    pic = "jon"
+  }
+
+  view {
+    query          = "SELECT 1 as numberOne"
+    use_legacy_sql = false
+  }
+}
