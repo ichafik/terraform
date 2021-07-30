@@ -25,7 +25,7 @@ resource "google_bigquery_table" "vw_aggregated" {
   }
 }
 
-resource "google_bigquery_table" "vw_aggregated" {
+resource "google_bigquery_table" "vw_aggregated_todelete" {
   dataset_id = google_bigquery_dataset.views.dataset_id
   table_id   = "vw_aggregated_todelete"
 
