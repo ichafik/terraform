@@ -1,0 +1,1 @@
+query = "SELECT * from `vital-invention-307210.pricingReport.gcp_billing_export_v1_01614C_4D742C_708252` "
