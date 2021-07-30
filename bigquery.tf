@@ -39,3 +39,17 @@ resource "google_bigquery_table" "vw_aggregated_todelete" {
     use_legacy_sql = false
   }
 }
+
+resource "google_bigquery_data_transfer_config" "query_config" {
+
+
+  display_name           = "my-query"
+  data_source_id         = "scheduled_query"
+  schedule               = "first sunday of quarter 00:00"
+  destination_dataset_id = google_bigquery_dataset.views.dataset_id
+  params = {
+    destination_table_name_template = "my_table"
+    write_disposition               = "WRITE_APPEND"
+    query                           = "SELECT 1 as test"
+  }
+}
