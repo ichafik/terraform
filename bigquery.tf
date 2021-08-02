@@ -39,9 +39,7 @@ resource "google_bigquery_table" "vw_aggregated_todelete" {
     use_legacy_sql = false
   }
 }
-
 resource "google_bigquery_data_transfer_config" "query_config" {
-
 
   display_name           = "my-query"
   data_source_id         = "scheduled_query"
@@ -50,6 +48,7 @@ resource "google_bigquery_data_transfer_config" "query_config" {
   params = {
     destination_table_name_template = "my_table"
     write_disposition               = "WRITE_APPEND"
-    query                           = "SELECT 1 as test"
+    query                           = "SELECT name FROM vw_aggregated_todelete WHERE x = 'y'"
   }
 }
+
