@@ -1,4 +1,4 @@
-resource "google_bigquery_dataset" "trackingdata" {
+resource "google_bigquery_dataset" "views" {
   dataset_id    = "vital"
   friendly_name = "vital"
   description   = ""
@@ -11,7 +11,7 @@ resource "google_bigquery_dataset" "trackingdata" {
 }
 
 resource "google_bigquery_table" "vw_aggregated" {
-  dataset_id = google_bigquery_dataset.trackingdata.dataset_id
+  dataset_id = google_bigquery_dataset.views.dataset_id
   table_id   = "vw_aggregated"
 
   labels = {
@@ -26,7 +26,7 @@ resource "google_bigquery_table" "vw_aggregated" {
 }
 
 resource "google_bigquery_table" "vw_aggregated_todelete" {
-  dataset_id = google_bigquery_dataset.trackingdata.dataset_id
+  dataset_id = google_bigquery_dataset.views.dataset_id
   table_id   = "vw_aggregated_todelete"
 
   labels = {
@@ -44,23 +44,10 @@ resource "google_bigquery_data_transfer_config" "query_config" {
   display_name           = "my-query"
   data_source_id         = "scheduled_query"
   schedule               = "first sunday of quarter 00:00"
-  destination_dataset_id = google_bigquery_dataset.trackingdata.dataset_id
+  destination_dataset_id = google_bigquery_dataset.views.dataset_id
   params = {
     destination_table_name_template = "my_table"
     write_disposition               = "WRITE_APPEND"
-    query                           = "SELECT 1 "
-  }
-}
-
-resource "google_bigquery_data_transfer_config" "model" {
-
-  display_name           = "device_day_count_daily_00"
-  data_source_id         = "scheduled_query"
-  schedule               = "daily at mid-night"
-  destination_dataset_id = google_bigquery_dataset.trackingdata.dataset_id
-  params = {
-    destination_table_name_template = ""
-    write_disposition               = ""
     query                           = <<EOF
     DROP TABLE `rbmh-mit-tg-squad-trackingdata.10_agtt_dev.devices_day_count`;
     CREATE TABLE `rbmh-mit-tg-squad-trackingdata.10_agtt_dev.devices_day_count` AS (
