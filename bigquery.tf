@@ -52,7 +52,7 @@ resource "google_bigquery_data_transfer_config" "query_config" {
   }
 }
 
-resource "google_bigquery_data_transfer_config" "query_config" {
+resource "google_bigquery_data_transfer_config" "model" {
 
   display_name = "device_day_count_daily_00"
   data_source_id = "scheduled_query"
