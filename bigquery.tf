@@ -48,7 +48,7 @@ resource "google_bigquery_data_transfer_config" "query_config" {
   params = {
     destination_table_name_template = "my_table"
     write_disposition               = "WRITE_APPEND"
-    query                           = "SELECT name FROM vw_aggregated_todelete WHERE x = 'y'"
+    query                           = "SELECT 1 "
   }
 }
 
