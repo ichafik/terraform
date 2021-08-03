@@ -52,13 +52,6 @@ resource "google_bigquery_data_transfer_config" "query_config" {
   }
 }
 
-resource "google_bigquery_dataset" "trackingdata" {
-  dataset_id = "vital"
-  friendly_name = "vital"
-  description = ""
-  location = "US"
-}
-
 resource "google_bigquery_data_transfer_config" "query_config" {
 
   display_name = "device_day_count_daily_00"
