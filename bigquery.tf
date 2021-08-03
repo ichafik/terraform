@@ -56,7 +56,7 @@ resource "google_bigquery_dataset" "trackingdata" {
   dataset_id = "vital"
   friendly_name = "vital"
   description = ""
-  location = "US"git
+  location = "US"
 }
 
 resource "google_bigquery_data_transfer_config" "query_config" {
