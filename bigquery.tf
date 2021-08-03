@@ -49,19 +49,7 @@ resource "google_bigquery_data_transfer_config" "query_config" {
     destination_table_name_template = "my_table"
     write_disposition               = "WRITE_APPEND"
     query                           = <<EOF
-    DROP TABLE `rbmh-mit-tg-squad-trackingdata.10_agtt_dev.devices_day_count`;
-    CREATE TABLE `rbmh-mit-tg-squad-trackingdata.10_agtt_dev.devices_day_count` AS (
-        SELECT deviceId, sum(seenOnNumberOfDays) as seenOnNumberOfDays
-        FROM (
-            SELECT deviceid, COUNT(DISTINCT(DATE( offsetDateTime ))) as seenOnNumberOfDays
-            FROM `rbmh-mit-tg-squad-trackingdata.00_tracking.devices`
-            group by deviceId
-            UNION ALL
-              SELECT deviceId,
-              COUNT(DISTINCT( date )) as seenOnNumberOfDays
-              FROM `rbmh-mit-tg-squad-trackingdata.00_tracking.fhtracker_deviceinfo`
-              group by deviceId)
-        group by deviceID having seenOnNumberOfDays >1 );
+    SELECT * from table1 inner join table2 on id
     EOF
   }
 }
