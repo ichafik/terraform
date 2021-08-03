@@ -8,5 +8,5 @@ terraform {
 
 provider "google" {
   project = "vital-invention-307210"
-  region = "us-east1"
+  region  = "us-east1"
 }
