@@ -1,12 +1,12 @@
 terraform {
   backend "gcs" {
-    bucket = "terraform-state-ichafik"
+    bucket = "rbmh-mit-tg-squad-playground-tf-state"
     prefix = "state"
   }
 }
 
 
 provider "google" {
-  project = "vital-invention-307210"
-  region  = "us-east1"
+  project = "rbmh-mit-tg-squad-playground"
+  region  = "eu-west"
 }

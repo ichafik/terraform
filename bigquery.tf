@@ -1,18 +1,13 @@
 resource "google_bigquery_dataset" "views" {
-  dataset_id    = "vital"
-  friendly_name = "vital"
+  dataset_id    = "rbmh-mit-tg-squad-playground"
+  friendly_name = "rbmh-mit-tg-squad-playground"
   description   = ""
-  location      = "US"
-
-  labels = {
-    env = "terraform"
-    pic = "jon"
-  }
+  location      = "EU"
 }
 
 resource "google_bigquery_table" "vw_aggregated" {
   dataset_id = google_bigquery_dataset.views.dataset_id
-  table_id   = "vw_aggregated"
+  table_id   = "playground.ichafik_vw_aggregated"
 
   labels = {
     env = "terraform"
@@ -20,37 +15,9 @@ resource "google_bigquery_table" "vw_aggregated" {
   }
 
   view {
-    query          = "SELECT * from `vital-invention-307210.pricingReport.gcp_billing_export_v1_01614C_4D742C_708252`"
+    query          = "SELECT 2 as numberTwo"
     use_legacy_sql = false
   }
 }
 
-resource "google_bigquery_table" "vw_aggregated_todelete" {
-  dataset_id = google_bigquery_dataset.views.dataset_id
-  table_id   = "vw_aggregated_todelete"
-
-  labels = {
-    env = "terraform"
-    pic = "jon"
-  }
-
-  view {
-    query          = "SELECT 1 as numberOne"
-    use_legacy_sql = false
-  }
-}
-resource "google_bigquery_data_transfer_config" "query_config" {
-
-  display_name           = "my-query"
-  data_source_id         = "scheduled_query"
-  schedule               = "first sunday of quarter 00:00"
-  destination_dataset_id = google_bigquery_dataset.views.dataset_id
-  params = {
-    destination_table_name_template = "my_table"
-    write_disposition               = "WRITE_APPEND"
-    query                           = <<EOF
-    SELECT * from table1 inner join table2 on id
-    EOF
-  }
-}
 
