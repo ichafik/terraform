@@ -1,12 +1,6 @@
-resource "google_bigquery_dataset" "views" {
-  dataset_id    = "playground"
-  friendly_name = "playground"
-  description   = ""
-  location      = "EU"
-}
 
 resource "google_bigquery_table" "vw_aggregated" {
-  dataset_id = google_bigquery_dataset.views.dataset_id
+  dataset_id = "playground"
   table_id   = "ichafik_vw_aggregated"
 
 
